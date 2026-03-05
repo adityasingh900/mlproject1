@@ -23,16 +23,3 @@ class CustomException(Exception):
     
 
 
-if __name__ == "__main__":
-    try:
-        logging.info("Starting the division operation") # This will go to the file
-        a = 1 / 0
-    except Exception as e:
-        # 1. Create the exception object
-        custom_error = CustomException(e, sys)
-        
-        # 2. MANUALLY tell the logger to write this error to the file
-        logging.error(custom_error.error_message)
-        
-        # 3. Raise the error so it still shows in your terminal
-        raise custom_error
