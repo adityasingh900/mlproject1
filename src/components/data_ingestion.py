@@ -7,6 +7,12 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass 
 
+from src.components.data_transformation import DataTransformation
+from src.components.data_transformation import DataTransformationConfig
+
+
+
+
 @dataclass       # decorator is used to create a class that is primarily used to store data. It automatically generates special methods like __init__()
                  # and __repr__() based on the class attributes, making it easier to create classes that are mainly used for holding data without having to write boilerplate code.
 class DataIngestionConfig:
@@ -21,7 +27,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered the data ingestion method or component")
         try:
-            df=pd.read_csv('notebook\data\stud.csv')
+            df=pd.read_csv(r'notebook\data\stud.csv')
             logging.info("Read the dataset as dataframe")
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
@@ -45,5 +51,8 @@ class DataIngestion:
 if __name__ == "__main__":
     obj=DataIngestion()
     train_data,test_data=obj.initiate_data_ingestion()
+
+    data_transformation=DataTransformation()
+    data_transformation.intiate_data_transformation(train_data,test_data)
 
    
